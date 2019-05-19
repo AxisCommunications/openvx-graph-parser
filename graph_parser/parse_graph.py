@@ -64,16 +64,9 @@ def argparse_setup():
     parser.add_argument('-v', '--verbose',
                         action='store_true', dest='verbose',
                         help="verbose mode")
-    parser.add_argument('-a', '--all',
-                        action='store_true', dest='generated_files',
-                        help="open the generated .c and .h files in emacs")
-    parser.add_argument('-s', '--source',
-                        action='store_true', dest='generated_source_file',
-                        help="open the generated .c file in emacs")
     parser.add_argument('-e', '--error',
                         action='store_true', dest='error_graph',
-                        help="create an error/validation graphml-file to visualize the success of parsing the graph,"
-                             "will also open the generated graph in yEd")
+                        help="create an error/validation graphml-file to visualize the success of parsing the graph")
     parser.add_argument('-d', '--debug',
                         action='store_true', dest='debug_mode',
                         help="debug mode, VERY verbose")
@@ -194,28 +187,13 @@ def main():
         else:
             print "GraphParser verification: SUCCESS"
 
-    # Open the validation/error graph in yEd
-    # Note that the yEd-softlink must be defined to point to your installation
-    # of yEd
     if args.error_graph:
-        # Write errors to a validation/error graph that can be opened in yEd for visualization
+        # Write validation/error graph for visualizing result of parsing
         validation_file = open(graph_filename_validation, "w")
         graphparser.validation_output_graph.writexml(validation_file)
-        validation_file_path = os.path.abspath('.') + os.path.sep + graph_filename_validation
-        # Obs! Important to close the file before yEd accesses it!!! Could result
-        # in corrupt file otherwise
         validation_file.close()
         if graphparser.verbose:
-            print "Opening verification graph: " + validation_file_path
-        # yEd_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "yEd-softlink"
-        # subprocess.Popen([yEd_path, validation_file_path])
-
-    # Open the generated files
-    if args.generated_files:
-        subprocess.Popen(
-            ["emacs", h_output_file, c_output_file])
-    elif args.generated_source_file:
-        subprocess.Popen(["emacs", c_output_file])
+            print "Created verification graph: " + validation_file
 
 if __name__ == "__main__":
     main()
