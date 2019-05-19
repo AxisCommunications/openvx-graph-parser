@@ -13,12 +13,12 @@ Here we have used the [OpenVX 1.2 sample code](https://www.khronos.org/registry/
 
 1. First we generate the necessary stripped OpenVX graph files, note the `--strip` option:
 ```
-python graph_parser/parse_graph.py -f example/threshold_example.graphml --strip
+python graph_parser/parse_graph.py -f example/threshold_example.graphml --strip --output_dir=example
 ```
    The generator should now have created two new C-files which we can compile.
-1. Inspect the generated files and move them to the example directory:
+1. Inspect the generated files:
 ```
-mv threshold_example_strip.{c,h} example/
+less example/threshold_example_strip.{c,h}
 ```
 1. Compile the dependency for the standalone test, here we call the compiled object file `threshold_example_graph.o`:
 ```

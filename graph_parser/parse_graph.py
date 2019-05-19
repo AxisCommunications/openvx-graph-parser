@@ -86,6 +86,8 @@ def argparse_setup():
     parser.add_argument('-V', '--openvx-version', dest='vx_version',
                         help="generate OpenVX code for OpenVX version VERSION, default is {}".format(graphml_parser.VX_VERSION_DEFAULT),
                         default=graphml_parser.VX_VERSION_DEFAULT)
+    parser.add_argument('-O', '--output_dir', dest='output_dir',
+                        help="specify output directory for generated files")
 
     return parser.parse_args()
 
@@ -120,6 +122,10 @@ def main():
     # and validation/error visualization graph
     file_name, file_extension = os.path.splitext(args.filename)
     graphname = os.path.basename(file_name)
+    output_dir = os.path.curdir
+    if args.output_dir:
+        output_dir = args.output_dir
+    graphname = os.path.join(output_dir, graphname)
     c_output_filename = graphname + ".c"
     h_output_filename = graphname + ".h"
     graph_filename_validation = graphname + "_VALIDATION.graphml"
