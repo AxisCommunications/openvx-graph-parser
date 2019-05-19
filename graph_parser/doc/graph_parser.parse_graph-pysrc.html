@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.parse_graph</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        Module&nbsp;parse_graph
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.parse_graph-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="graph_parser.parse_graph-module.html">Module graph_parser.parse_graph</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""OpenVX Graph Code Generator</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">Submodules used by parse_graph script</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">-------------------------------------</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">The parsing framework uses several files for the generic parsing</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">to build up global lists of node dependencies etc.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">For the specific parsing of the individual function nodes,</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">parser files are located in the folder node_parse_info</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">The parsing framework makes use of a GraphParser class instance,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">which is defined in the file graphml_parser.py.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">The GraphParser creates a set of global lists of id's for nodes of different fundamental types,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">for instance input image nodes, or function nodes connected to an output node.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">It also handles the graph logic needed to be able to autogenerate the OpenVX compliant C-code.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">The GraphParser also makes use of the class NodeInfo (defined in graphml_parser.py), which stores</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">information about edges connected to a particular node,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">their edge labels and the neighboring nodes connected by these edges.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">A diagram of how the individual function node parameters are accessed and parsed from this top script can be seen</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">in the call diagram below. Note that only ``graph_create_function.parse`` calls the individual node functions even</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">though the scripts calls functions from several other submodules in the ``code_generation`` subpackage.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">.. figure:: ../graph_parser/parse_graph_call_diagram.png</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">   Call sequence diagram schematic</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">The script calls in turn the following submodules:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">  1. ``graph_headerfile.py``: Generates a C-header file for the graph.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">  2. ``graph_sourcefile_beginning.py``: Generates the beginning of the source file and the graph registration function.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">  3. ``graph_create_function.py``: Generates the function that creates the graph skeleton (the graph without input and output images).</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">     It also calls all the necessary node implementation files in the package ``node_parse_info``.</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">  4. ``graph_set_io_function.py``: Generates the function used to set new input and output images between each graph processing.</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-comment"># We use a different documentation format from the other modules here to enable</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-comment"># adding the image of call sequence (requires docutils-common package or similar)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-name">__docformat__</tt> <tt class="py-op">=</tt> <tt class="py-string">"restructuredtext en"</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">subprocess</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">argparse</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-comment"># Shared common functionality</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package graph_parser.graphml_parser=graph_parser.graphml_parser-module.html,Module graph_parser.graphml_parser.graphml_parser=graph_parser.graphml_parser.graphml_parser-module.html"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-0', 'graphml_parser', 'link-0');">graphml_parser</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-1', 'graphml_parser', 'link-0');">graphml_parser</a></tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package graph_parser.node_parse_info=graph_parser.node_parse_info-module.html"><a title="graph_parser.node_parse_info" class="py-name" href="#" onclick="return doclink('link-2', 'node_parse_info', 'link-2');">node_parse_info</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module graph_parser.node_parse_info.function_node_library=graph_parser.node_parse_info.function_node_library-module.html"><a title="graph_parser.node_parse_info.function_node_library" class="py-name" href="#" onclick="return doclink('link-3', 'function_node_library', 'link-3');">function_node_library</a></tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-comment"># Code generating modules for the separate parts of the h- and c-files</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name" targets="Package graph_parser.code_generation=graph_parser.code_generation-module.html"><a title="graph_parser.code_generation" class="py-name" href="#" onclick="return doclink('link-4', 'code_generation', 'link-4');">code_generation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Module graph_parser.code_generation.graph_headerfile=graph_parser.code_generation.graph_headerfile-module.html"><a title="graph_parser.code_generation.graph_headerfile" class="py-name" href="#" onclick="return doclink('link-5', 'graph_headerfile', 'link-5');">graph_headerfile</a></tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="graph_parser.code_generation" class="py-name" href="#" onclick="return doclink('link-6', 'code_generation', 'link-4');">code_generation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Module graph_parser.code_generation.graph_sourcefile_beginning=graph_parser.code_generation.graph_sourcefile_beginning-module.html"><a title="graph_parser.code_generation.graph_sourcefile_beginning" class="py-name" href="#" onclick="return doclink('link-7', 'graph_sourcefile_beginning', 'link-7');">graph_sourcefile_beginning</a></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name"><a title="graph_parser.code_generation" class="py-name" href="#" onclick="return doclink('link-8', 'code_generation', 'link-4');">code_generation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Module graph_parser.code_generation.graph_create_function=graph_parser.code_generation.graph_create_function-module.html"><a title="graph_parser.code_generation.graph_create_function" class="py-name" href="#" onclick="return doclink('link-9', 'graph_create_function', 'link-9');">graph_create_function</a></tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="graph_parser.code_generation" class="py-name" href="#" onclick="return doclink('link-10', 'code_generation', 'link-4');">code_generation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Module graph_parser.code_generation.graph_set_io_images_function=graph_parser.code_generation.graph_set_io_images_function-module.html"><a title="graph_parser.code_generation.graph_set_io_images_function" class="py-name" href="#" onclick="return doclink('link-11', 'graph_set_io_images_function', 'link-11');">graph_set_io_images_function</a></tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="graph_parser.code_generation" class="py-name" href="#" onclick="return doclink('link-12', 'code_generation', 'link-4');">code_generation</a></tt> <tt class="py-keyword">import</tt> <tt id="link-13" class="py-name" targets="Module graph_parser.code_generation.graph_set_debug_images_function=graph_parser.code_generation.graph_set_debug_images_function-module.html"><a title="graph_parser.code_generation.graph_set_debug_images_function" class="py-name" href="#" onclick="return doclink('link-13', 'graph_set_debug_images_function', 'link-13');">graph_set_debug_images_function</a></tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="argparse_setup"></a><div id="argparse_setup-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="argparse_setup-toggle" onclick="return toggle('argparse_setup');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.parse_graph-module.html#argparse_setup">argparse_setup</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="argparse_setup-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="argparse_setup-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-docstring">""" Function to set up the argParse object with argument options."""</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">argparse</tt><tt class="py-op">.</tt><tt class="py-name">ArgumentParser</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-f'</tt><tt class="py-op">,</tt> <tt class="py-string">'--file'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'filename'</tt><tt class="py-op">,</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"read graph from FILENAME"</tt><tt class="py-op">,</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                        <tt class="py-name">required</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-v'</tt><tt class="py-op">,</tt> <tt class="py-string">'--verbose'</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                        <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'verbose'</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"verbose mode"</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-a'</tt><tt class="py-op">,</tt> <tt class="py-string">'--all'</tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                        <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'generated_files'</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"open the generated .c and .h files in emacs"</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-s'</tt><tt class="py-op">,</tt> <tt class="py-string">'--source'</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                        <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'generated_source_file'</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"open the generated .c file in emacs"</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-e'</tt><tt class="py-op">,</tt> <tt class="py-string">'--error'</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                        <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'error_graph'</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"create an error/validation graphml-file to visualize the success of parsing the graph,"</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                             <tt class="py-string">"will also open the generated graph in yEd"</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-d'</tt><tt class="py-op">,</tt> <tt class="py-string">'--debug'</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                        <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'debug_mode'</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"debug mode, VERY verbose"</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-S'</tt><tt class="py-op">,</tt> <tt class="py-string">'--strip'</tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                        <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'strip_mode'</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"generate OpenVX code stripped from graphmanager usage and other dependencies"</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-I'</tt><tt class="py-op">,</tt> <tt class="py-string">'--strip_io'</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                        <tt class="py-name">action</tt><tt class="py-op">=</tt><tt class="py-string">'store_true'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'strip_io'</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"also generate stripped code for setting I/O images. Only valid if -S/--strip is also given"</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_argument</tt><tt class="py-op">(</tt><tt class="py-string">'-V'</tt><tt class="py-op">,</tt> <tt class="py-string">'--openvx-version'</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'vx_version'</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                        <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"generate OpenVX code for OpenVX version VERSION, default is {}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-14', 'graphml_parser', 'link-0');">graphml_parser</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Variable graph_parser.graphml_parser.graphml_parser.VX_VERSION_DEFAULT=graph_parser.graphml_parser.graphml_parser-module.html#VX_VERSION_DEFAULT"><a title="graph_parser.graphml_parser.graphml_parser.VX_VERSION_DEFAULT" class="py-name" href="#" onclick="return doclink('link-15', 'VX_VERSION_DEFAULT', 'link-15');">VX_VERSION_DEFAULT</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                        <tt class="py-name">default</tt><tt class="py-op">=</tt><tt id="link-16" class="py-name"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-16', 'graphml_parser', 'link-0');">graphml_parser</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="graph_parser.graphml_parser.graphml_parser.VX_VERSION_DEFAULT" class="py-name" href="#" onclick="return doclink('link-17', 'VX_VERSION_DEFAULT', 'link-15');">VX_VERSION_DEFAULT</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="generate_source_code"></a><div id="generate_source_code-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="generate_source_code-toggle" onclick="return toggle('generate_source_code');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.parse_graph-module.html#generate_source_code">generate_source_code</a><tt class="py-op">(</tt><tt class="py-param">graphparser</tt><tt class="py-op">,</tt> <tt class="py-param">dry_run</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="generate_source_code-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="generate_source_code-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-name">generated_source_code_h</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-name">generated_source_code_c</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">dry_run</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt id="link-18" class="py-name"><a title="graph_parser.code_generation.graph_headerfile" class="py-name" href="#" onclick="return doclink('link-18', 'graph_headerfile', 'link-5');">graph_headerfile</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Function graph_parser.code_generation.graph_create_function.parse()=graph_parser.code_generation.graph_create_function-module.html#parse,Function graph_parser.code_generation.graph_create_function_strip.parse()=graph_parser.code_generation.graph_create_function_strip-module.html#parse,Function graph_parser.code_generation.graph_create_function_strip_io.parse()=graph_parser.code_generation.graph_create_function_strip_io-module.html#parse,Function graph_parser.code_generation.graph_headerfile.parse()=graph_parser.code_generation.graph_headerfile-module.html#parse,Function graph_parser.code_generation.graph_set_debug_images_function.parse()=graph_parser.code_generation.graph_set_debug_images_function-module.html#parse,Function graph_parser.code_generation.graph_set_io_images_function.parse()=graph_parser.code_generation.graph_set_io_images_function-module.html#parse,Function graph_parser.code_generation.graph_set_io_images_function_strip_io.parse()=graph_parser.code_generation.graph_set_io_images_function_strip_io-module.html#parse,Function graph_parser.code_generation.graph_sourcefile_beginning.parse()=graph_parser.code_generation.graph_sourcefile_beginning-module.html#parse,Method graph_parser.node_parse_info.abs_diff.AbsDiff.parse()=graph_parser.node_parse_info.abs_diff.AbsDiff-class.html#parse,Method graph_parser.node_parse_info.add.Add.parse()=graph_parser.node_parse_info.add.Add-class.html#parse,Method graph_parser.node_parse_info.and_node.And.parse()=graph_parser.node_parse_info.and_node.And-class.html#parse,Method graph_parser.node_parse_info.base_node.BaseNode.parse()=graph_parser.node_parse_info.base_node.BaseNode-class.html#parse,Method graph_parser.node_parse_info.convert_depth.ConvertDepth.parse()=graph_parser.node_parse_info.convert_depth.ConvertDepth-class.html#parse,Method graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse()=graph_parser.node_parse_info.dilate2x2.Dilate2x2-class.html#parse,Method graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse()=graph_parser.node_parse_info.dilate3x3.Dilate3x3-class.html#parse,Method graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse()=graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest-class.html#parse,Method graph_parser.node_parse_info.erode2x2.Erode2x2.parse()=graph_parser.node_parse_info.erode2x2.Erode2x2-class.html#parse,Method graph_parser.node_parse_info.erode3x3.Erode3x3.parse()=graph_parser.node_parse_info.erode3x3.Erode3x3-class.html#parse,Method graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse()=graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian-class.html#parse,Method graph_parser.node_parse_info.magnitude.Magnitude.parse()=graph_parser.node_parse_info.magnitude.Magnitude-class.html#parse,Method graph_parser.node_parse_info.multiply.Multiply.parse()=graph_parser.node_parse_info.multiply.Multiply-class.html#parse,Method graph_parser.node_parse_info.or_node.Or.parse()=graph_parser.node_parse_info.or_node.Or-class.html#parse,Method graph_parser.node_parse_info.scale_image.ScaleImage.parse()=graph_parser.node_parse_info.scale_image.ScaleImage-class.html#parse,Method graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse()=graph_parser.node_parse_info.sobel3x3.Sobel3x3-class.html#parse,Method graph_parser.node_parse_info.subtract.Subtract.parse()=graph_parser.node_parse_info.subtract.Subtract-class.html#parse,Method graph_parser.node_parse_info.table_lookup.TableLookup.parse()=graph_parser.node_parse_info.table_lookup.TableLookup-class.html#parse,Method graph_parser.node_parse_info.threshold.Threshold.parse()=graph_parser.node_parse_info.threshold.Threshold-class.html#parse,Method graph_parser.node_parse_info.warp_affine.WarpAffine.parse()=graph_parser.node_parse_info.warp_affine.WarpAffine-class.html#parse"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-19', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt id="link-20" class="py-name"><a title="graph_parser.code_generation.graph_sourcefile_beginning" class="py-name" href="#" onclick="return doclink('link-20', 'graph_sourcefile_beginning', 'link-7');">graph_sourcefile_beginning</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-21', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt id="link-22" class="py-name"><a title="graph_parser.code_generation.graph_create_function" class="py-name" href="#" onclick="return doclink('link-22', 'graph_create_function', 'link-9');">graph_create_function</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-23', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">dry_run</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt id="link-24" class="py-name"><a title="graph_parser.code_generation.graph_set_io_images_function" class="py-name" href="#" onclick="return doclink('link-24', 'graph_set_io_images_function', 'link-11');">graph_set_io_images_function</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-25', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt id="link-26" class="py-name"><a title="graph_parser.code_generation.graph_set_debug_images_function" class="py-name" href="#" onclick="return doclink('link-26', 'graph_set_debug_images_function', 'link-13');">graph_set_debug_images_function</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-27', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">generated_source_code_h</tt> <tt class="py-op">+=</tt>  <tt id="link-28" class="py-name"><a title="graph_parser.code_generation.graph_headerfile" class="py-name" href="#" onclick="return doclink('link-28', 'graph_headerfile', 'link-5');">graph_headerfile</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-29', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">generated_source_code_c</tt> <tt class="py-op">+=</tt> <tt id="link-30" class="py-name"><a title="graph_parser.code_generation.graph_sourcefile_beginning" class="py-name" href="#" onclick="return doclink('link-30', 'graph_sourcefile_beginning', 'link-7');">graph_sourcefile_beginning</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-31', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">generated_source_code_c</tt> <tt class="py-op">+=</tt> <tt id="link-32" class="py-name"><a title="graph_parser.code_generation.graph_create_function" class="py-name" href="#" onclick="return doclink('link-32', 'graph_create_function', 'link-9');">graph_create_function</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-33', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">dry_run</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">generated_source_code_c</tt> <tt class="py-op">+=</tt> <tt id="link-34" class="py-name"><a title="graph_parser.code_generation.graph_set_io_images_function" class="py-name" href="#" onclick="return doclink('link-34', 'graph_set_io_images_function', 'link-11');">graph_set_io_images_function</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-35', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-name">generated_source_code_c</tt> <tt class="py-op">+=</tt> <tt id="link-36" class="py-name"><a title="graph_parser.code_generation.graph_set_debug_images_function" class="py-name" href="#" onclick="return doclink('link-36', 'graph_set_debug_images_function', 'link-13');">graph_set_debug_images_function</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="graph_parser.code_generation.graph_create_function.parse
+graph_parser.code_generation.graph_create_function_strip.parse
+graph_parser.code_generation.graph_create_function_strip_io.parse
+graph_parser.code_generation.graph_headerfile.parse
+graph_parser.code_generation.graph_set_debug_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function.parse
+graph_parser.code_generation.graph_set_io_images_function_strip_io.parse
+graph_parser.code_generation.graph_sourcefile_beginning.parse
+graph_parser.node_parse_info.abs_diff.AbsDiff.parse
+graph_parser.node_parse_info.add.Add.parse
+graph_parser.node_parse_info.and_node.And.parse
+graph_parser.node_parse_info.base_node.BaseNode.parse
+graph_parser.node_parse_info.convert_depth.ConvertDepth.parse
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.parse
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.parse
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.parse
+graph_parser.node_parse_info.erode2x2.Erode2x2.parse
+graph_parser.node_parse_info.erode3x3.Erode3x3.parse
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.parse
+graph_parser.node_parse_info.magnitude.Magnitude.parse
+graph_parser.node_parse_info.multiply.Multiply.parse
+graph_parser.node_parse_info.or_node.Or.parse
+graph_parser.node_parse_info.scale_image.ScaleImage.parse
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.parse
+graph_parser.node_parse_info.subtract.Subtract.parse
+graph_parser.node_parse_info.table_lookup.TableLookup.parse
+graph_parser.node_parse_info.threshold.Threshold.parse
+graph_parser.node_parse_info.warp_affine.WarpAffine.parse" class="py-name" href="#" onclick="return doclink('link-37', 'parse', 'link-19');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">generated_source_code_h</tt><tt class="py-op">,</tt> <tt class="py-name">generated_source_code_c</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.parse_graph-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-docstring">""" The main function invoked to run the parser."""</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name" targets="Function graph_parser.parse_graph.argparse_setup()=graph_parser.parse_graph-module.html#argparse_setup"><a title="graph_parser.parse_graph.argparse_setup" class="py-name" href="#" onclick="return doclink('link-38', 'argparse_setup', 'link-38');">argparse_setup</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-comment"># Initialize the GraphParser.</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-name">graphparser</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-39', 'graphml_parser', 'link-0');">graphml_parser</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Class graph_parser.graphml_parser.graphml_parser.GraphParser=graph_parser.graphml_parser.graphml_parser.GraphParser-class.html"><a title="graph_parser.graphml_parser.graphml_parser.GraphParser" class="py-name" href="#" onclick="return doclink('link-40', 'GraphParser', 'link-40');">GraphParser</a></tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">verbose</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">debug_mode</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">strip_mode</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">strip_io</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">vx_version</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-comment"># File paths for reading and writing to generated c-files</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-comment"># and validation/error visualization graph</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-name">file_name</tt><tt class="py-op">,</tt> <tt class="py-name">file_extension</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">splitext</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-name">graphname</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">basename</tt><tt class="py-op">(</tt><tt class="py-name">file_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-name">c_output_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">".c"</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-name">h_output_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">".h"</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-name">graph_filename_validation</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_VALIDATION.graphml"</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">strip_mode</tt><tt class="py-op">:</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"NOTE: Strip mode is on! (with IO="</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">strip_io</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">")"</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"      Generating OpenVX code without other dependencies!"</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">strip_io</tt><tt class="py-op">:</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">            <tt class="py-name">c_output_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_strip_io.c"</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-name">h_output_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_strip_io.h"</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt class="py-name">graph_filename_validation</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_strip_io_VALIDATION.graphml"</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-name">c_output_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_strip.c"</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-name">h_output_filename</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_strip.h"</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">            <tt class="py-name">graph_filename_validation</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_strip_VALIDATION.graphml"</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">debug_mode</tt><tt class="py-op">:</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">basicConfig</tt><tt class="py-op">(</tt><tt class="py-name">level</tt><tt class="py-op">=</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">DEBUG</tt><tt class="py-op">,</tt> <tt class="py-name">format</tt><tt class="py-op">=</tt><tt class="py-string">'%(levelname)s: %(message)s'</tt><tt class="py-op">)</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Debug mode on (lots of debug info) \n"</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt class="py-comment"># Print Console info</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">verbose</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"*************************************************************"</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"******** OpenVX Graph Initialization Code Generator *********"</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"*************************************************************"</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Verbose mode on\n"</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Generating graph setup code from file: "</tt> <tt class="py-op">+</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">filename</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Output written to file: "</tt> <tt class="py-op">+</tt> <tt class="py-name">output_filename</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Generated code is compatible with OpenVX version "</tt> <tt class="py-op">+</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">vx_version</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"\n"</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method graph_parser.graphml_parser.graphml_parser.GraphParser.set_function_node_library()=graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#set_function_node_library"><a title="graph_parser.graphml_parser.graphml_parser.GraphParser.set_function_node_library" class="py-name" href="#" onclick="return doclink('link-41', 'set_function_node_library', 'link-41');">set_function_node_library</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="graph_parser.node_parse_info.function_node_library" class="py-name" href="#" onclick="return doclink('link-42', 'function_node_library', 'link-3');">function_node_library</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Class graph_parser.node_parse_info.function_node_library.Library=graph_parser.node_parse_info.function_node_library.Library-class.html"><a title="graph_parser.node_parse_info.function_node_library.Library" class="py-name" href="#" onclick="return doclink('link-43', 'Library', 'link-43');">Library</a></tt><tt class="py-op">(</tt><tt class="py-name">vx_version</tt><tt class="py-op">=</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">vx_version</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method graph_parser.graphml_parser.graphml_parser.GraphParser.load_graph()=graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#load_graph"><a title="graph_parser.graphml_parser.graphml_parser.GraphParser.load_graph" class="py-name" href="#" onclick="return doclink('link-44', 'load_graph', 'link-44');">load_graph</a></tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-comment"># Open output files</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">    <tt class="py-name">c_output_file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">c_output_filename</tt><tt class="py-op">,</tt> <tt class="py-string">"w"</tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-name">h_output_file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">h_output_filename</tt><tt class="py-op">,</tt> <tt class="py-string">"w"</tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-comment"># Dry-run is done to ensure that there are no errors when the image format check is done</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-comment"># The image format check is done before the actual code-generation</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-comment"># which is done on the second parse without dry_run,</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">    <tt class="py-comment"># in particular this is needed for the debug node mode,</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-comment"># since it will use the generated explicit image formats</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt class="py-name">dry_run</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt id="link-45" class="py-name" targets="Function graph_parser.parse_graph.generate_source_code()=graph_parser.parse_graph-module.html#generate_source_code"><a title="graph_parser.parse_graph.generate_source_code" class="py-name" href="#" onclick="return doclink('link-45', 'generate_source_code', 'link-45');">generate_source_code</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">dry_run</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graph_has_errors</tt><tt class="py-op">:</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-comment"># Run format checker on image nodes only if function nodes have passed their checks</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graph_has_errors</tt> <tt class="py-op">|=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Method graph_parser.graphml_parser.graphml_parser.GraphParser.verify_graph_image_formats()=graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#verify_graph_image_formats"><a title="graph_parser.graphml_parser.graphml_parser.GraphParser.verify_graph_image_formats" class="py-name" href="#" onclick="return doclink('link-46', 'verify_graph_image_formats', 'link-46');">verify_graph_image_formats</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graph_has_errors</tt><tt class="py-op">:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-comment"># Generate C code files for graph registration</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-op">[</tt><tt class="py-name">source_h</tt><tt class="py-op">,</tt> <tt class="py-name">source_c</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name"><a title="graph_parser.parse_graph.generate_source_code" class="py-name" href="#" onclick="return doclink('link-47', 'generate_source_code', 'link-45');">generate_source_code</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-name">h_output_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">source_h</tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-name">c_output_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">source_c</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-name">h_output_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">"AUTOGENERATION CONTAINS ERRORS!!!!"</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-name">c_output_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">"AUTOGENERATION CONTAINS ERRORS!!!!"</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt class="py-name">c_output_file</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">    <tt class="py-name">h_output_file</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">verbose</tt><tt class="py-op">:</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graph_has_errors</tt><tt class="py-op">:</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"GraphParser verification: FAILURE"</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"GraphParser verification: SUCCESS"</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-comment"># Open the validation/error graph in yEd</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">    <tt class="py-comment"># Note that the yEd-softlink must be defined to point to your installation</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">    <tt class="py-comment"># of yEd</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">error_graph</tt><tt class="py-op">:</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">        <tt class="py-comment"># Write errors to a validation/error graph that can be opened in yEd for visualization</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt class="py-name">validation_file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">graph_filename_validation</tt><tt class="py-op">,</tt> <tt class="py-string">"w"</tt><tt class="py-op">)</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">        <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">validation_output_graph</tt><tt class="py-op">.</tt><tt class="py-name">writexml</tt><tt class="py-op">(</tt><tt class="py-name">validation_file</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">        <tt class="py-name">validation_file_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">abspath</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">sep</tt> <tt class="py-op">+</tt> <tt class="py-name">graph_filename_validation</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-comment"># Obs! Important to close the file before yEd accesses it!!! Could result</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">        <tt class="py-comment"># in corrupt file otherwise</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">        <tt class="py-name">validation_file</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">verbose</tt><tt class="py-op">:</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"Opening verification graph: "</tt> <tt class="py-op">+</tt> <tt class="py-name">validation_file_path</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-comment"># yEd_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "yEd-softlink"</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">        <tt class="py-comment"># subprocess.Popen([yEd_path, validation_file_path])</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">    <tt class="py-comment"># Open the generated files</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">generated_files</tt><tt class="py-op">:</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">Popen</tt><tt class="py-op">(</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">            <tt class="py-op">[</tt><tt class="py-string">"emacs"</tt><tt class="py-op">,</tt> <tt class="py-name">output_fileheadername</tt><tt class="py-op">,</tt> <tt class="py-name">output_filename</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">generated_source_file</tt><tt class="py-op">:</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">Popen</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">"emacs"</tt><tt class="py-op">,</tt> <tt class="py-name">output_filename</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt><tt class="py-op">:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">    <tt id="link-48" class="py-name" targets="Function graph_parser.parse_graph.main()=graph_parser.parse_graph-module.html#main"><a title="graph_parser.parse_graph.main" class="py-name" href="#" onclick="return doclink('link-48', 'main', 'link-48');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

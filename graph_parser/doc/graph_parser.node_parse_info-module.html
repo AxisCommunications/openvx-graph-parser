@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.node_parse_info</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        Package&nbsp;node_parse_info
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.node_parse_info-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PACKAGE DESCRIPTION ==================== -->
+<h1 class="epydoc">Package node_parse_info</h1><p class="nomargin-top"><span class="codelink"><a href="graph_parser.node_parse_info-pysrc.html">source&nbsp;code</a></span></p>
+<p>A Python module for handling parsing of a single OpenVX node.</p>
+  <h1 class="heading">Adding new node types</h1>
+    <p>To add support for a new OpenVX function node type to the graph 
+    parser, follow these steps:</p>
+    <ol start="1">
+      <li>
+        Look up the name of the calculation node in the OpenVX standard. 
+        Strip the name from &quot;vx&quot; and &quot;Node&quot;. The 
+        remaining part is the name to be used by the graph parser.
+        <p>E.g. if the node is named: &quot;vxMyNodeNameNode&quot;, the 
+        graph parser should use the name &quot;MyNodeName&quot;.</p>
+      </li>
+      <li>
+        In the file function_node_library.py, add a new entry for the new 
+        node in the different dictionaries as follows:
+        <ul>
+          <li>
+            <b>Dictionary for the constructor name:</b>
+            <ul>
+              <li>
+                NODE_DICTIONARY:                     'MyNodeName' : 
+                MyNodeName()
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Dictionaries for I/O image indices:</b>
+            <p>Look up the parameter index of the first input and the first
+            output images in the OpenVX API Note that the first parameter 
+            (the graph object) is not counted, and indexing starts from 
+            0.</p>
+            <ul>
+              <li>
+                FIRST_INPUT_IMAGE_INDEX_DICT         'MyNodeName' :    0
+              </li>
+              <li>
+                FIRST_OUTPUT_IMAGE_INDEX_DICT        'MyNodeName':    1
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Dictionary for non-image parameters and indices:</b>
+            <p>Add an entry for each of the non-image parameters in the 
+            node API, and add the corresponding parameter indices in the 
+            respective dictionaries:</p>
+            <ul>
+              <li>
+                PARAMETER_NAMES_DICT                 'MyNodeName':    
+                [&quot;vx_convert_policy_e&quot;, &quot;vx_scalar&quot;],
+              </li>
+              <li>
+                PARAMETER_INDICES_DICT               'MyNodeName':    [2, 
+                3]
+              </li>
+            </ul>
+          </li>
+          <li>
+            <b>Dictionary for I/O image formats:</b>
+            <p>Add the allowed input and output image formats as lists of 
+            format lists in the respective dictionaries. Note that the 
+            inputs ans outputs are coupled. So an input list of image 
+            formats should correspond in index position to the related 
+            output list of image formats. The Or node is given as an 
+            example here:</p>
+            <ul>
+              <li>
+                VALID_INPUT_IMAGE_FORMATS            'Or' 
+                :[['U8','U8'],['U8','U8']]
+              </li>
+              <li>
+                VALID_OUTPUT_IMAGE_FORMATS           'Or' 
+                :[['U8'],['VIRT-&gt;U8']]
+              </li>
+            </ul>
+            <p>If no format is specified in the yEd graph, the image is 
+            treated as a virtual image. When the parser checks the image 
+            formats, it will then look for a match in the valid formats 
+            arrays containing an entry beginning with <i>VIRT</i> and will 
+            generate code with the image having the format given after the 
+            arrow (i.e. here U8). Other nodes, taking this image as input 
+            will then treat the input as U8. Thus, the parser never sees 
+            virtual input images, only virtual output images. See further 
+            details about this formatting in function_node_library.py.</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Add a class object for the new node. For an example of a simple 
+        node, see e.g. the file or_node.py. The class object inherits from 
+        a base class providing common functionality for all nodes, such as 
+        parsing for image parameters.The new class node must contain an 
+        __init__ function and a parse function. The latter is used by the 
+        graphml_parser to generate the code for a node creation function 
+        according to the OpenVX API.
+      </li>
+    </ol>
+
+<!-- ==================== SUBMODULES ==================== -->
+<a name="section-Submodules"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Submodules</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Submodules"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr><td class="summary">
+  <ul class="nomargin">
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.abs_diff-module.html">graph_parser.node_parse_info.abs_diff</a></strong>: <em class="summary">Class for writing C-code to create a vxAbsDiffNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.add-module.html">graph_parser.node_parse_info.add</a></strong>: <em class="summary">Class for writing C-code to create a vxAddNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.and_node-module.html">graph_parser.node_parse_info.and_node</a></strong>: <em class="summary">Class for writing C-code to create a vxAndNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.base_node-module.html">graph_parser.node_parse_info.base_node</a></strong>: <em class="summary">Base class for nodes for writing C-code to create a vxXXXNode 
+        objects.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.convert_depth-module.html">graph_parser.node_parse_info.convert_depth</a></strong>: <em class="summary">Class for writing C-code to create a vxConvertDepthNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.dilate2x2-module.html">graph_parser.node_parse_info.dilate2x2</a></strong>: <em class="summary">Class for writing C-code to create a vxDilate2x2Node object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.dilate3x3-module.html">graph_parser.node_parse_info.dilate3x3</a></strong>: <em class="summary">Class for writing C-code to create a vxDilate3x3Node object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.dubbel_io_test-module.html">graph_parser.node_parse_info.dubbel_io_test</a></strong>: <em class="summary">Class for writing C-code to create a vxDubbelIoTestNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.erode2x2-module.html">graph_parser.node_parse_info.erode2x2</a></strong>: <em class="summary">Class for writing C-code to create a vxErode2x2Node object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.erode3x3-module.html">graph_parser.node_parse_info.erode3x3</a></strong>: <em class="summary">Class for writing C-code to create a vxErode3x3Node object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.function_node_library-module.html">graph_parser.node_parse_info.function_node_library</a></strong>: <em class="summary">Module with library method for accessing function node objects.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.half_scale_gaussian-module.html">graph_parser.node_parse_info.half_scale_gaussian</a></strong>: <em class="summary">Class for writing C-code to create a vxHalfScaleGaussianNode 
+        object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.magnitude-module.html">graph_parser.node_parse_info.magnitude</a></strong>: <em class="summary">Class for writing C-code to create a vxMagnitudeNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.multiply-module.html">graph_parser.node_parse_info.multiply</a></strong>: <em class="summary">Class for writing C-code to create a vxMultiplyNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.or_node-module.html">graph_parser.node_parse_info.or_node</a></strong>: <em class="summary">Class for writing C-code to create a vxOrNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.scale_image-module.html">graph_parser.node_parse_info.scale_image</a></strong>: <em class="summary">Class for writing C-code to create a vxScaleImageNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.sobel3x3-module.html">graph_parser.node_parse_info.sobel3x3</a></strong>: <em class="summary">Class for writing C-code to create a vxSobel3x3Node object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.subtract-module.html">graph_parser.node_parse_info.subtract</a></strong>: <em class="summary">Class for writing C-code to create a vxSubtractNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.table_lookup-module.html">graph_parser.node_parse_info.table_lookup</a></strong>: <em class="summary">Class for writing C-code to create a vxTableLookupNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.threshold-module.html">graph_parser.node_parse_info.threshold</a></strong>: <em class="summary">Class for writing C-code to create a vxThresholdNode object.</em>    </li>
+    <li> <strong class="uidlink"><a href="graph_parser.node_parse_info.warp_affine-module.html">graph_parser.node_parse_info.warp_affine</a></strong>: <em class="summary">Class for writing C-code to create a vxWarpAffineNode object.</em>    </li>
+  </ul></td></tr>
+</table>
+
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

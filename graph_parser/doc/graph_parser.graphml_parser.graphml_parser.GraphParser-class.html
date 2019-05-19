@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.graphml_parser.graphml_parser.GraphParser</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        <a href="graph_parser.graphml_parser-module.html">Package&nbsp;graphml_parser</a> ::
+        <a href="graph_parser.graphml_parser.graphml_parser-module.html">Module&nbsp;graphml_parser</a> ::
+        Class&nbsp;GraphParser
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.graphml_parser.graphml_parser.GraphParser-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class GraphParser</h1><p class="nomargin-top"><span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser">source&nbsp;code</a></span></p>
+<p>OpenVX graph parser class</p>
+  <p>Uses a minidom parser to parse the input file specified by the 
+  filename argument.</p>
+  <p>The first thing that the GraphParser does when it is instansiated is 
+  to parse the XML file provided in the filename argument.</p>
+  <p>Then the GraphParser creates and populates a number of synched lists 
+  used to store necessary information for the C-code generation</p>
+  <p>Global graph information is generated and stored in the arrays set up 
+  in the init function. Three main things are needed:</p>
+  <p>1: Lists of all input/output and internal image nodes id's, where the 
+  list indices correspond to C-array indices for corresponding 
+  C-arrays.</p>
+  <p>2: Index-synched lists of all the function nodes and their 
+  corresponding OpenVX names as well as a node_info object for every 
+  function node, containing information about all edges (lines) entering or
+  leaving the function nodes and the nodes they connect to.</p>
+  <p>3: Separately index-synced lists for all input and output function 
+  nodes and lists with the corresponding first input and output indices in 
+  the parameter list for the node create OpenVX function (as defined in the
+  standard). An input function node is a function node that has at least 
+  one edge connected to an input image node, and similarly for the output 
+  function nodes. A given function node can technically be present both in 
+  the input- and output function node lists though usually this is not the 
+  case.</p>
+  <p>After all lists have been created, no mode parsing should be needed, 
+  and the C-code can be generated and written to file, using queries to the
+  GraphParser methods and its generated lists.</p>
+  <p>The GraphParser is mainly intended to provide answers about the graph 
+  structure. It ideally should not handle the generation of the actual 
+  C-code. The C-code generating python code uses the Node query methods of 
+  the GraphParser to make decisions on how to generate the C-code based on 
+  the global and local graph node information stored in the 
+  GraphParser.</p>
+  <p>If the verbose flag is set, the GraphParser will print more detailed 
+  information to the terminal. If the debug_mode flag is set, it will print
+  even more information.</p>
+  <p>If the strip_mode flag is set, the GraphParser will generate C-code 
+  without any graphmanager or other libs/vision dependencies. Such 
+  generated code is typically used for standalone OpenVX tests.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">verbose</span>,
+        <span class="summary-sig-arg">debug_mode</span>,
+        <span class="summary-sig-arg">strip_mode</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">strip_io</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">vx_version</span>=<span class="summary-sig-default">VX_VERSION_DEFAULT</span>)</span><br />
+      Initializes the GraphParser</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_io_strip_mode"></a><span class="summary-sig-name">set_io_strip_mode</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Set strip mode to also generate code for I/O-image setting</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.set_io_strip_mode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#set_function_node_library" class="summary-sig-name">set_function_node_library</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">library</span>)</span><br />
+      Set the function node library to be used.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.set_function_node_library">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#load_graph" class="summary-sig-name">load_graph</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">file_path</span>)</span><br />
+      Loads the graph definition from file and processes it.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.load_graph">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="verify_graph_image_formats"></a><span class="summary-sig-name">verify_graph_image_formats</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.verify_graph_image_formats">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="function_nodes_list_check"></a><span class="summary-sig-name">function_nodes_list_check</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.function_nodes_list_check">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="image_nodes_list_check"></a><span class="summary-sig-name">image_nodes_list_check</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.image_nodes_list_check">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_function_node_info"></a><span class="summary-sig-name">get_function_node_info</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_function_node_info">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_indexed_names"></a><span class="summary-sig-name">get_indexed_names</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node_type_string</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_indexed_names">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_dynamic_function_nodes_info"></a><span class="summary-sig-name">get_dynamic_function_nodes_info</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_dynamic_function_nodes_info">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_index_for_function_node_in_list"></a><span class="summary-sig-name">get_index_for_function_node_in_list</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node_type_string</span>,
+        <span class="summary-sig-arg">node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_index_for_function_node_in_list">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#get_value_for_attribute" class="summary-sig-name">get_value_for_attribute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node_id</span>,
+        <span class="summary-sig-arg">attribute</span>)</span><br />
+      Get the value of a specific image attribute.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_value_for_attribute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#get_image_format" class="summary-sig-name">get_image_format</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node_id</span>)</span><br />
+      Get the image format for a specific image node.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_image_format">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_uniform_image_value_for_id"></a><span class="summary-sig-name">get_uniform_image_value_for_id</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">image_id</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_uniform_image_value_for_id">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_function_io_node"></a><span class="summary-sig-name">is_function_io_node</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">current_node</span>,
+        <span class="summary-sig-arg">node_info</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.is_function_io_node">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_function_debug_node"></a><span class="summary-sig-name">is_function_debug_node</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">current_node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.is_function_debug_node">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="is_function_dynamic_node"></a><span class="summary-sig-name">is_function_dynamic_node</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">current_node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.is_function_dynamic_node">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="using_refcounted_assignment_string"></a><span class="summary-sig-name">using_refcounted_assignment_string</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">current_node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.using_refcounted_assignment_string">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="use_any_refcounted_assignment_string"></a><span class="summary-sig-name">use_any_refcounted_assignment_string</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.use_any_refcounted_assignment_string">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">verbose</span>,
+        <span class="sig-arg">debug_mode</span>,
+        <span class="sig-arg">strip_mode</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">strip_io</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">vx_version</span>=<span class="sig-default">VX_VERSION_DEFAULT</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initializes the GraphParser</p>
+  <p>Parses the graphml file, then sets up and populates the needed 
+  node-related lists.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_function_node_library"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_function_node_library</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">library</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.set_function_node_library">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set the function node library to be used.</p>
+  <p>The function node library contains necessary parametrization 
+  information of the supported function nodes</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="load_graph"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">load_graph</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">file_path</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.load_graph">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Loads the graph definition from file and processes it.</p>
+  <p>Also initializes the image_nodes and function_nodes objects and 
+  populates them with parsed information from the loaded graph.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_value_for_attribute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_value_for_attribute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">node_id</span>,
+        <span class="sig-arg">attribute</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_value_for_attribute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the value of a specific image attribute. :param node_id: The id of
+  the image node. :param attribute: The attribute to get. :return: A tuple 
+  containing (is_userdata, value) where: is_userdata is True if value 
+  contains reference to userdata value is the value of of the attribute or 
+  default value if attribute is not set.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_image_format"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_image_format</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">node_id</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.graphml_parser.graphml_parser-pysrc.html#GraphParser.get_image_format">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the image format for a specific image node. :param node_id: The id
+  of the image node. :return: The image format for the image node.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.node_parse_info.base_node.BaseNode</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        <a href="graph_parser.node_parse_info-module.html">Package&nbsp;node_parse_info</a> ::
+        <a href="graph_parser.node_parse_info.base_node-module.html">Module&nbsp;base_node</a> ::
+        Class&nbsp;BaseNode
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.node_parse_info.base_node.BaseNode-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class BaseNode</h1><p class="nomargin-top"><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode">source&nbsp;code</a></span></p>
+<p>Class for parsing node with the given class name.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.node_parse_info.base_node.BaseNode-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Specified according to the OpenVX standard</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="reset_parameters"></a><span class="summary-sig-name">reset_parameters</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>,
+        <span class="summary-sig-arg">dry_run</span>)</span><br />
+      Used to reset internal parameters before parsing is done in the 
+      subclasses</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.reset_parameters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.node_parse_info.base_node.BaseNode-class.html#parse" class="summary-sig-name">parse</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>,
+        <span class="summary-sig-arg">assignment_string</span>,
+        <span class="summary-sig-arg">dry_run</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Parsing of xml and creation of dummy function node.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_border_mode" class="summary-sig-name">parse_border_mode</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>,
+        <span class="summary-sig-arg">node_ref_string</span>,
+        <span class="summary-sig-arg">dry_run</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Parsing of border mode parameters from xml.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_border_mode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_graph_has_errors"></a><span class="summary-sig-name">set_graph_has_errors</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>,
+        <span class="summary-sig-arg">errorstring</span>)</span><br />
+      Sets an error text on the given function node.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.set_graph_has_errors">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="require_nbr_input_edges"></a><span class="summary-sig-name">require_nbr_input_edges</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>,
+        <span class="summary-sig-arg">nbr_edges</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.require_nbr_input_edges">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="require_nbr_output_edges"></a><span class="summary-sig-name">require_nbr_output_edges</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>,
+        <span class="summary-sig-arg">nbr_edges</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.require_nbr_output_edges">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="require_2_input_edges_labeled"></a><span class="summary-sig-name">require_2_input_edges_labeled</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.require_2_input_edges_labeled">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="require_2_output_edges_labeled"></a><span class="summary-sig-name">require_2_output_edges_labeled</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.require_2_output_edges_labeled">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.node_parse_info.base_node.BaseNode-class.html#append_to_io_arrays_strip" class="summary-sig-name">append_to_io_arrays_strip</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>)</span><br />
+      Special version of append_to_io_arrays for strip mode.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.append_to_io_arrays_strip">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.node_parse_info.base_node.BaseNode-class.html#append_to_io_arrays" class="summary-sig-name">append_to_io_arrays</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>)</span><br />
+      Appends reference to the current node in the corresp.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.append_to_io_arrays">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_input_parameter"></a><span class="summary-sig-name">parse_input_parameter</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">node_info</span>)</span><br />
+      Creates C-code node input image parameter for a given index in 
+      node_info.input_data_node_ids[].</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_input_parameter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_output_parameter"></a><span class="summary-sig-name">parse_output_parameter</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">node_info</span>)</span><br />
+      Creates C-code node output image parameter for a given index in 
+      node_info.output_data_node_ids[].</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_output_parameter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_input_parameters"></a><span class="summary-sig-name">parse_input_parameters</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>)</span><br />
+      Creates the C-code node input image parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_input_parameters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parse_output_parameters"></a><span class="summary-sig-name">parse_output_parameters</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">current_node</span>)</span><br />
+      Creates the C-code node input image parameters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_output_parameters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_parameter" class="summary-sig-name">parse_parameter</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">parameter</span>,
+        <span class="summary-sig-arg">current_node</span>)</span><br />
+      Creates a C-code function node parameter</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_parameter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_single_parameter" class="summary-sig-name">parse_single_parameter</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">graphparser</span>,
+        <span class="summary-sig-arg">parameter</span>,
+        <span class="summary-sig-arg">current_node</span>)</span><br />
+      Creates a C-code function node parameter</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_single_parameter">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="border_mode_count"></a><span class="summary-name">border_mode_count</span> = <code title="0">0</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Specified according to the OpenVX standard</p>
+  <p>Note that the first index is not counted (i.e. the graph index in the 
+  node creation function)</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">graphparser</span>,
+        <span class="sig-arg">current_node</span>,
+        <span class="sig-arg">assignment_string</span>,
+        <span class="sig-arg">dry_run</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parsing of xml and creation of dummy function node.</p>
+  <p>Note that this function should only be called if the graph function 
+  node class was not found. This might mean that the node name was not 
+  found, or that the parse function of the subclass has not been 
+  implemented.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_border_mode"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_border_mode</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">graphparser</span>,
+        <span class="sig-arg">current_node</span>,
+        <span class="sig-arg">node_ref_string</span>,
+        <span class="sig-arg">dry_run</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_border_mode">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parsing of border mode parameters from xml. This functionality lies in
+  base_node bacause it is possible to set border mode for all nodes but it 
+  might not be supported by a node implementation. The function node C-name
+  is given by node_ref_string Returns C code for setting the border mode on
+  the function node.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="append_to_io_arrays_strip"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">append_to_io_arrays_strip</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">graphparser</span>,
+        <span class="sig-arg">current_node</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.append_to_io_arrays_strip">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Special version of append_to_io_arrays for strip mode. Here we don't 
+  use refcounted nodes type, simply save the dynamic nodes to list.</p>
+  <p>This function assumes the node lists that current_node is compared 
+  against can not contain duplicates of nodes (node ids).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="append_to_io_arrays"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">append_to_io_arrays</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">graphparser</span>,
+        <span class="sig-arg">current_node</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.append_to_io_arrays">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Appends reference to the current node in the corresp. I/O C-array if 
+  it is a I/O function node</p>
+  <p>This function assumes the node lists that current_node is compared 
+  against can not contain duplicates of nodes (node ids).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_parameter"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_parameter</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">graphparser</span>,
+        <span class="sig-arg">parameter</span>,
+        <span class="sig-arg">current_node</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_parameter">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Creates a C-code function node parameter</p>
+  <p>Searches for a parameter that matches the given type in parameter. The
+  first occurrence found will be used. If the function node creation 
+  function has multiple parameters of the given type, a more general 
+  function must be called.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="parse_single_parameter"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parse_single_parameter</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">graphparser</span>,
+        <span class="sig-arg">parameter</span>,
+        <span class="sig-arg">current_node</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.node_parse_info.base_node-pysrc.html#BaseNode.parse_single_parameter">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Creates a C-code function node parameter</p>
+  <p>Searches for a parameter that matches the given type in parameter. The
+  first occurrence found will be used. If the function node creation 
+  function has multiple parameters of the given type, a more general 
+  function must be called.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

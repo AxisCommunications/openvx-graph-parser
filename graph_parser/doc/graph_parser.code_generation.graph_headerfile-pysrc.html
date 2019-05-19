@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.code_generation.graph_headerfile</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        <a href="graph_parser.code_generation-module.html">Package&nbsp;code_generation</a> ::
+        Module&nbsp;graph_headerfile
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.code_generation.graph_headerfile-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="graph_parser.code_generation.graph_headerfile-module.html">Module graph_parser.code_generation.graph_headerfile</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">"""Module for generating the header file for the graph definition C-file</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">datetime</tt> <tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="create_userdata_struct"></a><div id="create_userdata_struct-def"><a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="create_userdata_struct-toggle" onclick="return toggle('create_userdata_struct');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.code_generation.graph_headerfile-module.html#create_userdata_struct">create_userdata_struct</a><tt class="py-op">(</tt><tt class="py-param">graphparser</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create_userdata_struct-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="create_userdata_struct-expanded"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-docstring">""" Create a custom userdata struct for graph create arguments, e.g. reference size """</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-name">parsed_string</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module graph_parser.graphml_parser.userdata=graph_parser.graphml_parser.userdata-module.html"><a title="graph_parser.graphml_parser.userdata" class="py-name" href="#" onclick="return doclink('link-0', 'userdata', 'link-0');">userdata</a></tt><tt class="py-op">.</tt><tt class="py-name">has_userdata</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-string">typedef struct {</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-name">attributes</tt> <tt class="py-op">=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name"><a title="graph_parser.graphml_parser.userdata" class="py-name" href="#" onclick="return doclink('link-1', 'userdata', 'link-0');">userdata</a></tt><tt class="py-op">.</tt><tt class="py-name">attributes</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">attribute</tt> <tt class="py-keyword">in</tt> <tt class="py-name">attributes</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"""\</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-string">    %s %s;</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-string">"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">attributes</tt><tt class="py-op">[</tt><tt class="py-name">attribute</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">attribute</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"} %s_userdata_t;\n"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graphname</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">parsed_string</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="parse_strip_mode"></a><div id="parse_strip_mode-def"><a name="L27"></a><tt class="py-lineno"> 27</tt> <a class="py-toggle" href="#" id="parse_strip_mode-toggle" onclick="return toggle('parse_strip_mode');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.code_generation.graph_headerfile-module.html#parse_strip_mode">parse_strip_mode</a><tt class="py-op">(</tt><tt class="py-param">graphparser</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parse_strip_mode-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="parse_strip_mode-expanded"><a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-docstring">"""Write the header file if strip mode."""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-name">graphname</tt> <tt class="py-op">=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graphname</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">graphname_strip</tt> <tt class="py-op">=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_strip"</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">num_input_imgs</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module graph_parser.graphml_parser.image_nodes=graph_parser.graphml_parser.image_nodes-module.html"><a title="graph_parser.graphml_parser.image_nodes" class="py-name" href="#" onclick="return doclink('link-2', 'image_nodes', 'link-2');">image_nodes</a></tt><tt class="py-op">.</tt><tt class="py-name">input_nodes_indexed_names</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">num_output_imgs</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="graph_parser.graphml_parser.image_nodes" class="py-name" href="#" onclick="return doclink('link-3', 'image_nodes', 'link-2');">image_nodes</a></tt><tt class="py-op">.</tt><tt class="py-name">output_nodes_indexed_names</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-name">parsed_string</tt> <tt class="py-op">=</tt> <tt class="py-string">"""\</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-string">/* WARNING: DO NOT EDIT THIS FILE MANUALLY!</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-string">            THIS FILE IS AUTO-GENERATED AND ANY CHANGES</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-string">            WILL BE OVERWRITTEN IF FILE IS RE-GENERATED. */</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-string"> *  @file   %s.h</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-string"> *  @author HAL 9000</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-string"> *  @brief  Autogenerated OpenVX graph skeleton setup code.</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-string"> *</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-string"> *  Generated %s</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-string">#ifndef %s_H</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-string">#define %s_H</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-string">#include &lt;stdbool.h&gt;</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-string">#include &lt;VX/vx.h&gt;</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-string">%s</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-string">"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">graphname_strip</tt><tt class="py-op">,</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">now</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strftime</tt><tt class="py-op">(</tt><tt class="py-string">'%c'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Function graph_parser.code_generation.graph_headerfile.create_userdata_struct()=graph_parser.code_generation.graph_headerfile-module.html#create_userdata_struct"><a title="graph_parser.code_generation.graph_headerfile.create_userdata_struct" class="py-name" href="#" onclick="return doclink('link-4', 'create_userdata_struct', 'link-4');">create_userdata_struct</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">strip_io</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">input_index_lists</tt> <tt class="py-op">=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module graph_parser.graphml_parser.function_nodes=graph_parser.graphml_parser.function_nodes-module.html"><a title="graph_parser.graphml_parser.function_nodes" class="py-name" href="#" onclick="return doclink('link-5', 'function_nodes', 'link-5');">function_nodes</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method graph_parser.graphml_parser.function_nodes.FunctionNodes.get_index_lists_for_io_function_nodes()=graph_parser.graphml_parser.function_nodes.FunctionNodes-class.html#get_index_lists_for_io_function_nodes"><a title="graph_parser.graphml_parser.function_nodes.FunctionNodes.get_index_lists_for_io_function_nodes" class="py-name" href="#" onclick="return doclink('link-6', 'get_index_lists_for_io_function_nodes', 'link-6');">get_index_lists_for_io_function_nodes</a></tt><tt class="py-op">(</tt><tt class="py-string">'input'</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                                                                                              <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="graph_parser.graphml_parser.image_nodes" class="py-name" href="#" onclick="return doclink('link-7', 'image_nodes', 'link-2');">image_nodes</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">num_input_nodes</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-name">input_index_lists</tt><tt class="py-op">.</tt><tt class="py-name">function_nodes_index_list</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">output_index_lists</tt> <tt class="py-op">=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="graph_parser.graphml_parser.function_nodes" class="py-name" href="#" onclick="return doclink('link-8', 'function_nodes', 'link-5');">function_nodes</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="graph_parser.graphml_parser.function_nodes.FunctionNodes.get_index_lists_for_io_function_nodes" class="py-name" href="#" onclick="return doclink('link-9', 'get_index_lists_for_io_function_nodes', 'link-6');">get_index_lists_for_io_function_nodes</a></tt><tt class="py-op">(</tt><tt class="py-string">'output'</tt><tt class="py-op">,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                                                                                              <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="graph_parser.graphml_parser.image_nodes" class="py-name" href="#" onclick="return doclink('link-10', 'image_nodes', 'link-2');">image_nodes</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">num_output_nodes</tt> <tt class="py-op">=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-name">output_index_lists</tt><tt class="py-op">.</tt><tt class="py-name">function_nodes_index_list</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-string">typedef struct {</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-string">    vx_node input_nodes[%s];</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-string">    vx_node output_nodes[%s];</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-string">} %s_io_nodes_t;</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-string">"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">num_input_nodes</tt><tt class="py-op">,</tt> <tt class="py-name">num_output_nodes</tt><tt class="py-op">,</tt> <tt class="py-name">graphname_strip</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-string"> *  Call this to create the nodes etc.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-string">bool</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-string">%s_create(vx_context context, vx_graph graph_skeleton, vx_image input_images[%s], vx_image output_images[%s], void *userdata, %s_io_nodes_t *io_nodes);</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-string">"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">graphname</tt><tt class="py-op">,</tt> <tt class="py-name">num_input_imgs</tt><tt class="py-op">,</tt> <tt class="py-name">num_output_imgs</tt><tt class="py-op">,</tt> <tt class="py-name">graphname_strip</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-string">bool</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-string">%s_io_set_imgs(vx_image input_images[%s], vx_image output_images[%s], %s_io_nodes_t *io_nodes);</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-string">"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">graphname_strip</tt><tt class="py-op">,</tt> <tt class="py-name">num_input_imgs</tt><tt class="py-op">,</tt> <tt class="py-name">num_output_imgs</tt><tt class="py-op">,</tt> <tt class="py-name">graphname_strip</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-string"> *  Call this to create the nodes etc.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-string">bool</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-string">%s_create(vx_context context, vx_graph graph_skeleton, vx_image input_images[%s], vx_image output_images[%s], void *userdata);</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-string">"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">graphname</tt><tt class="py-op">,</tt> <tt class="py-name">num_input_imgs</tt><tt class="py-op">,</tt> <tt class="py-name">num_output_imgs</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"#endif /* "</tt> <tt class="py-op">+</tt> <tt class="py-name">graphname</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"_H */\n"</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">parsed_string</tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="parse"></a><div id="parse-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="parse-toggle" onclick="return toggle('parse');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.code_generation.graph_headerfile-module.html#parse">parse</a><tt class="py-op">(</tt><tt class="py-param">graphparser</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parse-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="parse-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-docstring">"""Write the header file."""</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-comment"># Special function if strip_mode</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">strip_mode</tt><tt class="py-op">:</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name" targets="Function graph_parser.code_generation.graph_headerfile.parse_strip_mode()=graph_parser.code_generation.graph_headerfile-module.html#parse_strip_mode,Function graph_parser.code_generation.graph_sourcefile_beginning.parse_strip_mode()=graph_parser.code_generation.graph_sourcefile_beginning-module.html#parse_strip_mode"><a title="graph_parser.code_generation.graph_headerfile.parse_strip_mode
+graph_parser.code_generation.graph_sourcefile_beginning.parse_strip_mode" class="py-name" href="#" onclick="return doclink('link-11', 'parse_strip_mode', 'link-11');">parse_strip_mode</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-name">graphname</tt> <tt class="py-op">=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graphname</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">parsed_string</tt> <tt class="py-op">=</tt> <tt class="py-string">"""\</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-string">/* WARNING: DO NOT EDIT THIS FILE MANUALLY!</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-string">            THIS FILE IS AUTO-GENERATED AND ANY CHANGES</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-string">            WILL BE OVERWRITTEN IF FILE IS RE-GENERATED. */</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-string"> *  @file   %s.h</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-string"> *  @author HAL 9000</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-string"> *  @brief  Autogenerated OpenVX graph skeleton setup code.</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-string"> *</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-string"> *  Generated %s</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-string"> *  @mainpage %s - Graph registration, skeleton creation and IO image handling</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-string"> *  @section Design</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-string"> *  The Python parser sees the number of inputs per node and generates these setters with proper indexing.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-string"> *  It also knows the size of the array of nodes constructed in %s_create.</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-string"> *  Thus hardcoded here by the parser upon autogeneration</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-string"> *  OBS:: The graph manager does not have to store the setup structure of the different number of nodes for each input/output image.</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-string"> *  This is the task of the parser, and should result in such hardcoded code as below...</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-string">#ifndef %s_H</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-string">#define %s_H</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-string">#include &lt;VX/vx.h&gt;</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-string">#include &lt;vision/graphmanager.h&gt;</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-string">%s</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-string"> *  The graph registration function.</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-string"> *  Must have the same name as the filename.</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-string">bool</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-string">%s(graphmanager_t *graph_manager, io_param_t *io_param, void *userdata);</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-string"> *  Called by graphmanager_graph_skeleton_create.</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-string">bool</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-string">%s_create(graphmanager_t *graph_manager, graphmanager_nodes_t *nodes, io_param_t *io_param, void *userdata);</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-string">/**</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-string"> *  Updates image buffers on to the previously created graph skeleton.</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-string"> */</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-string">bool</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-string">%s_update_io_images(graphmanager_t *graph_manager, io_param_t *io_param);</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-string">"""</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">graphname</tt><tt class="py-op">,</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">now</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strftime</tt><tt class="py-op">(</tt><tt class="py-string">'%c'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">       <tt id="link-12" class="py-name"><a title="graph_parser.code_generation.graph_headerfile.create_userdata_struct" class="py-name" href="#" onclick="return doclink('link-12', 'create_userdata_struct', 'link-4');">create_userdata_struct</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">       <tt class="py-name">graphname</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">,</tt> <tt class="py-name">graphname</tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="graph_parser.graphml_parser.image_nodes" class="py-name" href="#" onclick="return doclink('link-13', 'image_nodes', 'link-2');">image_nodes</a></tt><tt class="py-op">.</tt><tt class="py-name">debug_nodes_indexed_names</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"bool\n"</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">graphname</tt> <tt class="py-op">+</tt> <tt class="py-string">"_set_debug_images(graphmanager_t *graph_manager, debug_param_t *debug_param);\n\n"</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"#endif /* "</tt> <tt class="py-op">+</tt> <tt class="py-name">graphname</tt><tt class="py-op">.</tt><tt class="py-name">upper</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"_H */\n"</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">parsed_string</tt> </tt>
+</div><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

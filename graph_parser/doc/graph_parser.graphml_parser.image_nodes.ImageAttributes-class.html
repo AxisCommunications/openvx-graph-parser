@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.graphml_parser.image_nodes.ImageAttributes</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        <a href="graph_parser.graphml_parser-module.html">Package&nbsp;graphml_parser</a> ::
+        <a href="graph_parser.graphml_parser.image_nodes-module.html">Module&nbsp;image_nodes</a> ::
+        Class&nbsp;ImageAttributes
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.graphml_parser.image_nodes.ImageAttributes-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ImageAttributes</h1><p class="nomargin-top"><span class="codelink"><a href="graph_parser.graphml_parser.image_nodes-pysrc.html#ImageAttributes">source&nbsp;code</a></span></p>
+<p>Class that contains id and explicitly set attributes for an image 
+  node. Image attributes are specific properties set on images in the 
+  graph. Image attributes do not include image format and image type (e.g. 
+  input or debug image). These are currently handled separately. NOTE: When
+  values for an attribute are referencing userdata attributes it is assumed
+  that the reference is the first thing on the value and that there only is
+  one reference per attribute. E.g. [width ref_width/2] is OK whereas 
+  [width 0.5*ref_width] is not.</p>
+  <p>Examples of how to specify image attributes in graph on an image 
+  node's data field: [width 100] [width ref_value*7] (Assuming ref_value is
+  defined in userdata node)</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">node_id</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.image_nodes-pysrc.html#ImageAttributes.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.graphml_parser.image_nodes.ImageAttributes-class.html#get_image_attribute" class="summary-sig-name">get_image_attribute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">userdata</span>,
+        <span class="summary-sig-arg">attribute</span>)</span><br />
+      Get the value of a specific image attribute.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.image_nodes-pysrc.html#ImageAttributes.get_image_attribute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="graph_parser.graphml_parser.image_nodes.ImageAttributes-class.html#is_valid_attribute" class="summary-sig-name">is_valid_attribute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">userdata</span>,
+        <span class="summary-sig-arg">attribute</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Check if attribute,value- combination is valid.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.image_nodes-pysrc.html#ImageAttributes.is_valid_attribute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="get_userdata_attributes"></a><span class="summary-sig-name">get_userdata_attributes</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">userdata</span>)</span><br />
+      Filter image attributes to get only those that are referencing 
+      userdata attributes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="graph_parser.graphml_parser.image_nodes-pysrc.html#ImageAttributes.get_userdata_attributes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="get_image_attribute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_image_attribute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">userdata</span>,
+        <span class="sig-arg">attribute</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.graphml_parser.image_nodes-pysrc.html#ImageAttributes.get_image_attribute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the value of a specific image attribute. :param userdata: The 
+  userdata object. :param attribute: The attribute to get. :return: A tuple
+  containing (is_userdata, value) where: is_userdata is True if value 
+  contains reference to userdata value is the value of of the attribute or 
+  default value if attribute is not set.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="is_valid_attribute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">is_valid_attribute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">userdata</span>,
+        <span class="sig-arg">attribute</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="graph_parser.graphml_parser.image_nodes-pysrc.html#ImageAttributes.is_valid_attribute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check if attribute,value- combination is valid. :param userdata: The 
+  userdata object. :param attribute: :return: A tuple containing (valid, 
+  err_string) where: valid is True if the combination is valid and False 
+  otherwise err_string is an error string indicating why combination is 
+  invalid if valid is False</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

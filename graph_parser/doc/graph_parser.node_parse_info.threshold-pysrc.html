@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.node_parse_info.threshold</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        <a href="graph_parser.node_parse_info-module.html">Package&nbsp;node_parse_info</a> ::
+        Module&nbsp;threshold
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.node_parse_info.threshold-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="graph_parser.node_parse_info.threshold-module.html">Module graph_parser.node_parse_info.threshold</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""Class for writing C-code to create a vxThresholdNode object.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">Done by parsing the graph parameters of the xml description of the node.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">parsed_string contains the C code to be written to file</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module graph_parser.node_parse_info.base_node=graph_parser.node_parse_info.base_node-module.html"><a title="graph_parser.node_parse_info.base_node" class="py-name" href="#" onclick="return doclink('link-0', 'base_node', 'link-0');">base_node</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class graph_parser.node_parse_info.base_node.BaseNode=graph_parser.node_parse_info.base_node.BaseNode-class.html"><a title="graph_parser.node_parse_info.base_node.BaseNode" class="py-name" href="#" onclick="return doclink('link-1', 'BaseNode', 'link-1');">BaseNode</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package graph_parser.graphml_parser=graph_parser.graphml_parser-module.html,Module graph_parser.graphml_parser.graphml_parser=graph_parser.graphml_parser.graphml_parser-module.html"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-2', 'graphml_parser', 'link-2');">graphml_parser</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-3', 'graphml_parser', 'link-2');">graphml_parser</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="Threshold"></a><div id="Threshold-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="Threshold-toggle" onclick="return toggle('Threshold');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="graph_parser.node_parse_info.threshold.Threshold-class.html">Threshold</a><tt class="py-op">(</tt><tt class="py-base-class">BaseNode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Threshold-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Threshold-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-docstring">"""Class for parsing node with the given class name."""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="Threshold.__init__"></a><div id="Threshold.__init__-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="Threshold.__init__-toggle" onclick="return toggle('Threshold.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.node_parse_info.threshold.Threshold-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Threshold.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Threshold.__init__-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-docstring">"""Initialization of Class object"""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt id="link-4" class="py-name"><a title="graph_parser.node_parse_info.base_node.BaseNode" class="py-name" href="#" onclick="return doclink('link-4', 'BaseNode', 'link-1');">BaseNode</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method graph_parser.graphml_parser.function_nodes.FunctionNodes.__init__()=graph_parser.graphml_parser.function_nodes.FunctionNodes-class.html#__init__,Method graph_parser.graphml_parser.function_nodes.IndexLists.__init__()=graph_parser.graphml_parser.function_nodes.IndexLists-class.html#__init__,Method graph_parser.graphml_parser.function_nodes.NodeInfo.__init__()=graph_parser.graphml_parser.function_nodes.NodeInfo-class.html#__init__,Method graph_parser.graphml_parser.graphml_parser.GraphParser.__init__()=graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#__init__,Method graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker.__init__()=graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker-class.html#__init__,Method graph_parser.graphml_parser.image_nodes.ImageAttributes.__init__()=graph_parser.graphml_parser.image_nodes.ImageAttributes-class.html#__init__,Method graph_parser.graphml_parser.image_nodes.ImageNodes.__init__()=graph_parser.graphml_parser.image_nodes.ImageNodes-class.html#__init__,Method graph_parser.graphml_parser.userdata.Userdata.__init__()=graph_parser.graphml_parser.userdata.Userdata-class.html#__init__,Method graph_parser.node_parse_info.abs_diff.AbsDiff.__init__()=graph_parser.node_parse_info.abs_diff.AbsDiff-class.html#__init__,Method graph_parser.node_parse_info.add.Add.__init__()=graph_parser.node_parse_info.add.Add-class.html#__init__,Method graph_parser.node_parse_info.and_node.And.__init__()=graph_parser.node_parse_info.and_node.And-class.html#__init__,Method graph_parser.node_parse_info.base_node.BaseNode.__init__()=graph_parser.node_parse_info.base_node.BaseNode-class.html#__init__,Method graph_parser.node_parse_info.convert_depth.ConvertDepth.__init__()=graph_parser.node_parse_info.convert_depth.ConvertDepth-class.html#__init__,Method graph_parser.node_parse_info.dilate2x2.Dilate2x2.__init__()=graph_parser.node_parse_info.dilate2x2.Dilate2x2-class.html#__init__,Method graph_parser.node_parse_info.dilate3x3.Dilate3x3.__init__()=graph_parser.node_parse_info.dilate3x3.Dilate3x3-class.html#__init__,Method graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.__init__()=graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest-class.html#__init__,Method graph_parser.node_parse_info.erode2x2.Erode2x2.__init__()=graph_parser.node_parse_info.erode2x2.Erode2x2-class.html#__init__,Method graph_parser.node_parse_info.erode3x3.Erode3x3.__init__()=graph_parser.node_parse_info.erode3x3.Erode3x3-class.html#__init__,Method graph_parser.node_parse_info.function_node_library.Library.__init__()=graph_parser.node_parse_info.function_node_library.Library-class.html#__init__,Method graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.__init__()=graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian-class.html#__init__,Method graph_parser.node_parse_info.magnitude.Magnitude.__init__()=graph_parser.node_parse_info.magnitude.Magnitude-class.html#__init__,Method graph_parser.node_parse_info.multiply.Multiply.__init__()=graph_parser.node_parse_info.multiply.Multiply-class.html#__init__,Method graph_parser.node_parse_info.or_node.Or.__init__()=graph_parser.node_parse_info.or_node.Or-class.html#__init__,Method graph_parser.node_parse_info.scale_image.ScaleImage.__init__()=graph_parser.node_parse_info.scale_image.ScaleImage-class.html#__init__,Method graph_parser.node_parse_info.sobel3x3.Sobel3x3.__init__()=graph_parser.node_parse_info.sobel3x3.Sobel3x3-class.html#__init__,Method graph_parser.node_parse_info.subtract.Subtract.__init__()=graph_parser.node_parse_info.subtract.Subtract-class.html#__init__,Method graph_parser.node_parse_info.table_lookup.TableLookup.__init__()=graph_parser.node_parse_info.table_lookup.TableLookup-class.html#__init__,Method graph_parser.node_parse_info.threshold.Threshold.__init__()=graph_parser.node_parse_info.threshold.Threshold-class.html#__init__,Method graph_parser.node_parse_info.warp_affine.WarpAffine.__init__()=graph_parser.node_parse_info.warp_affine.WarpAffine-class.html#__init__"><a title="graph_parser.graphml_parser.function_nodes.FunctionNodes.__init__
+graph_parser.graphml_parser.function_nodes.IndexLists.__init__
+graph_parser.graphml_parser.function_nodes.NodeInfo.__init__
+graph_parser.graphml_parser.graphml_parser.GraphParser.__init__
+graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker.__init__
+graph_parser.graphml_parser.image_nodes.ImageAttributes.__init__
+graph_parser.graphml_parser.image_nodes.ImageNodes.__init__
+graph_parser.graphml_parser.userdata.Userdata.__init__
+graph_parser.node_parse_info.abs_diff.AbsDiff.__init__
+graph_parser.node_parse_info.add.Add.__init__
+graph_parser.node_parse_info.and_node.And.__init__
+graph_parser.node_parse_info.base_node.BaseNode.__init__
+graph_parser.node_parse_info.convert_depth.ConvertDepth.__init__
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.__init__
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.__init__
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.__init__
+graph_parser.node_parse_info.erode2x2.Erode2x2.__init__
+graph_parser.node_parse_info.erode3x3.Erode3x3.__init__
+graph_parser.node_parse_info.function_node_library.Library.__init__
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.__init__
+graph_parser.node_parse_info.magnitude.Magnitude.__init__
+graph_parser.node_parse_info.multiply.Multiply.__init__
+graph_parser.node_parse_info.or_node.Or.__init__
+graph_parser.node_parse_info.scale_image.ScaleImage.__init__
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.__init__
+graph_parser.node_parse_info.subtract.Subtract.__init__
+graph_parser.node_parse_info.table_lookup.TableLookup.__init__
+graph_parser.node_parse_info.threshold.Threshold.__init__
+graph_parser.node_parse_info.warp_affine.WarpAffine.__init__" class="py-name" href="#" onclick="return doclink('link-5', '__init__', 'link-5');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thresh_count</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thresh_val_count</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="Threshold.parse"></a><div id="Threshold.parse-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="Threshold.parse-toggle" onclick="return toggle('Threshold.parse');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.node_parse_info.threshold.Threshold-class.html#parse">parse</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">graphparser</tt><tt class="py-op">,</tt> <tt class="py-param">current_node</tt><tt class="py-op">,</tt> <tt class="py-param">assignment_string</tt><tt class="py-op">,</tt> <tt class="py-param">dry_run</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Threshold.parse-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Threshold.parse-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-docstring">"""Parsing of xml and C code for creation of the function node."""</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.reset_parameters()=graph_parser.node_parse_info.base_node.BaseNode-class.html#reset_parameters"><a title="graph_parser.node_parse_info.base_node.BaseNode.reset_parameters" class="py-name" href="#" onclick="return doclink('link-6', 'reset_parameters', 'link-6');">reset_parameters</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">,</tt> <tt class="py-name">dry_run</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-comment">#===============</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-comment"># ERROR CHECKING</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-comment">#===============</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.require_nbr_input_edges()=graph_parser.node_parse_info.base_node.BaseNode-class.html#require_nbr_input_edges"><a title="graph_parser.node_parse_info.base_node.BaseNode.require_nbr_input_edges" class="py-name" href="#" onclick="return doclink('link-7', 'require_nbr_input_edges', 'link-7');">require_nbr_input_edges</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.require_nbr_output_edges()=graph_parser.node_parse_info.base_node.BaseNode-class.html#require_nbr_output_edges"><a title="graph_parser.node_parse_info.base_node.BaseNode.require_nbr_output_edges" class="py-name" href="#" onclick="return doclink('link-8', 'require_nbr_output_edges', 'link-8');">require_nbr_output_edges</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-comment">#Add error checking for the used parameters</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-comment">#=================</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-comment"># PARSE PARAMETERS</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-comment">#=================</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-comment">#TODO: Only binary threshold currently supported.</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_has_errors</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thresh_val_count</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">dry_run</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thresh_val_count</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">vx_version</tt> <tt class="py-op">==</tt> <tt id="link-9" class="py-name"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-9', 'graphml_parser', 'link-2');">graphml_parser</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Variable graph_parser.graphml_parser.graphml_parser.VX_VERSION_1_2=graph_parser.graphml_parser.graphml_parser-module.html#VX_VERSION_1_2"><a title="graph_parser.graphml_parser.graphml_parser.VX_VERSION_1_2" class="py-name" href="#" onclick="return doclink('link-10', 'VX_VERSION_1_2', 'link-10');">VX_VERSION_1_2</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                    <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    vx_pixel_value_t thresh_value;\n"</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                    <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    "</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.parse_single_parameter()=graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_single_parameter"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_single_parameter" class="py-name" href="#" onclick="return doclink('link-11', 'parse_single_parameter', 'link-11');">parse_single_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_size"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                    <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">" thresh_value;\n"</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            <tt class="py-comment">#Create the threshold object</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thresh_count</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">dry_run</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">thresh_count</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    vx_threshold thresh;\n"</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">vx_version</tt> <tt class="py-op">==</tt> <tt id="link-12" class="py-name"><a title="graph_parser.graphml_parser
+graph_parser.graphml_parser.graphml_parser" class="py-name" href="#" onclick="return doclink('link-12', 'graphml_parser', 'link-2');">graphml_parser</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="graph_parser.graphml_parser.graphml_parser.VX_VERSION_1_2" class="py-name" href="#" onclick="return doclink('link-13', 'VX_VERSION_1_2', 'link-10');">VX_VERSION_1_2</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-name">input_format</tt> <tt class="py-op">=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Module graph_parser.graphml_parser.image_format_checker=graph_parser.graphml_parser.image_format_checker-module.html"><a title="graph_parser.graphml_parser.image_format_checker" class="py-name" href="#" onclick="return doclink('link-14', 'image_format_checker', 'link-14');">image_format_checker</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker.get_image_format_from_image_node_id()=graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker-class.html#get_image_format_from_image_node_id"><a title="graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker.get_image_format_from_image_node_id" class="py-name" href="#" onclick="return doclink('link-15', 'get_image_format_from_image_node_id', 'link-15');">get_image_format_from_image_node_id</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                                                                                                    <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Module graph_parser.graphml_parser.image_nodes=graph_parser.graphml_parser.image_nodes-module.html"><a title="graph_parser.graphml_parser.image_nodes" class="py-name" href="#" onclick="return doclink('link-16', 'image_nodes', 'link-16');">image_nodes</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                                                                                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_info</tt><tt class="py-op">.</tt><tt class="py-name">input_image_node_ids</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                <tt class="py-name">output_format</tt> <tt class="py-op">=</tt> <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="graph_parser.graphml_parser.image_format_checker" class="py-name" href="#" onclick="return doclink('link-17', 'image_format_checker', 'link-14');">image_format_checker</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker.get_image_format_from_image_node_id" class="py-name" href="#" onclick="return doclink('link-18', 'get_image_format_from_image_node_id', 'link-15');">get_image_format_from_image_node_id</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                                                                                                     <tt class="py-name">graphparser</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="graph_parser.graphml_parser.image_nodes" class="py-name" href="#" onclick="return doclink('link-19', 'image_nodes', 'link-16');">image_nodes</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                                                                                                     <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_info</tt><tt class="py-op">.</tt><tt class="py-name">output_image_node_ids</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    thresh_value.{} = "</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">input_format</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_single_parameter" class="py-name" href="#" onclick="return doclink('link-20', 'parse_single_parameter', 'link-11');">parse_single_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_pixel_value_t"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">";\n"</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    thresh = vxCreateThresholdForImage(graphmanager_get_context(graph_manager)"</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Function graph_parser.graphml_parser.parse_common.parse_parameter()=graph_parser.graphml_parser.parse_common-module.html#parse_parameter,Method graph_parser.node_parse_info.base_node.BaseNode.parse_parameter()=graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_parameter"><a title="graph_parser.graphml_parser.parse_common.parse_parameter
+graph_parser.node_parse_info.base_node.BaseNode.parse_parameter" class="py-name" href="#" onclick="return doclink('link-21', 'parse_parameter', 'link-21');">parse_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_threshold_type_e"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">", VX_DF_IMAGE_"</tt> <tt class="py-op">+</tt> <tt class="py-name">input_format</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">", VX_DF_IMAGE_"</tt> <tt class="py-op">+</tt> <tt class="py-name">output_format</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">");\n"</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">                <tt class="py-comment">#Set the threshold pointer value on the threshold object</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    vxCopyThresholdValue(thresh, &amp;thresh_value, VX_WRITE_ONLY, VX_MEMORY_TYPE_HOST);\n"</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    thresh_value = "</tt> <tt class="py-comment">#vx_int32 = typedef of int32_t. Maybe find better name than vx_size?</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_single_parameter" class="py-name" href="#" onclick="return doclink('link-22', 'parse_single_parameter', 'link-11');">parse_single_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_single_parameter" class="py-name" href="#" onclick="return doclink('link-23', 'parse_single_parameter', 'link-11');">parse_single_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_size"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">";\n"</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    thresh = vxCreateThreshold(graphmanager_get_context(graph_manager)"</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="graph_parser.graphml_parser.parse_common.parse_parameter
+graph_parser.node_parse_info.base_node.BaseNode.parse_parameter" class="py-name" href="#" onclick="return doclink('link-24', 'parse_parameter', 'link-21');">parse_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_threshold_type_e"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> <tt class="py-comment">#e.g. VX_THRESHOLD_TYPE_BINARY (VX_THRESHOLD_TYPE_RANGE also supported but not yet implemented)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="graph_parser.graphml_parser.parse_common.parse_parameter
+graph_parser.node_parse_info.base_node.BaseNode.parse_parameter" class="py-name" href="#" onclick="return doclink('link-25', 'parse_parameter', 'link-21');">parse_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_type_e"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> <tt class="py-comment">#Only VX_TYPE_UINT8 supported in vx1.0</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">");\n"</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">                <tt class="py-comment">#Set the threshold pointer value on the threshold object</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    vxSetThresholdAttribute(thresh"</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="graph_parser.graphml_parser.parse_common.parse_parameter
+graph_parser.node_parse_info.base_node.BaseNode.parse_parameter" class="py-name" href="#" onclick="return doclink('link-26', 'parse_parameter', 'link-21');">parse_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_threshold_attribute_e"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> <tt class="py-comment">#e.g. VX_THRESHOLD_ATTRIBUTE_THRESHOLD_VALUE (which other are supported?)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">", &amp;thresh_value"</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">", sizeof("</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_single_parameter" class="py-name" href="#" onclick="return doclink('link-27', 'parse_single_parameter', 'link-11');">parse_single_parameter</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-string">"vx_size"</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">")"</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">                <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">");\n"</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">            <tt class="py-comment">#Create the threshold node with the attached threshold object</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    "</tt> <tt class="py-op">+</tt> <tt class="py-name">assignment_string</tt> <tt class="py-op">+</tt> <tt class="py-string">"vxThresholdNode(graph_skeleton"</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.parse_input_parameters()=graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_input_parameters"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_input_parameters" class="py-name" href="#" onclick="return doclink('link-28', 'parse_input_parameters', 'link-28');">parse_input_parameters</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">", thresh"</tt> </tt>
+<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.parse_output_parameters()=graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_output_parameters"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_output_parameters" class="py-name" href="#" onclick="return doclink('link-29', 'parse_output_parameters', 'link-29');">parse_output_parameters</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">");\n"</tt> </tt>
+<a name="L94"></a><tt class="py-lineno">94</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    vxReleaseThreshold(&amp;thresh);\n"</tt> </tt>
+<a name="L95"></a><tt class="py-lineno">95</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.append_to_io_arrays()=graph_parser.node_parse_info.base_node.BaseNode-class.html#append_to_io_arrays"><a title="graph_parser.node_parse_info.base_node.BaseNode.append_to_io_arrays" class="py-name" href="#" onclick="return doclink('link-30', 'append_to_io_arrays', 'link-30');">append_to_io_arrays</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno">96</tt>  <tt class="py-line"> </tt>
+<a name="L97"></a><tt class="py-lineno">97</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">parsed_string</tt> </tt>
+</div></div><a name="L98"></a><tt class="py-lineno">98</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

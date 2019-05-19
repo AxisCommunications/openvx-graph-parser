@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>graph_parser.node_parse_info.sobel3x3</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="graph_parser-module.html">Package&nbsp;graph_parser</a> ::
+        <a href="graph_parser.node_parse_info-module.html">Package&nbsp;node_parse_info</a> ::
+        Module&nbsp;sobel3x3
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="graph_parser.node_parse_info.sobel3x3-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="graph_parser.node_parse_info.sobel3x3-module.html">Module graph_parser.node_parse_info.sobel3x3</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""Class for writing C-code to create a vxSobel3x3Node object.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">Done by parsing the graph parameters of the xml description of the node.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">parsed_string contains the C code to be written to file</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module graph_parser.node_parse_info.base_node=graph_parser.node_parse_info.base_node-module.html"><a title="graph_parser.node_parse_info.base_node" class="py-name" href="#" onclick="return doclink('link-0', 'base_node', 'link-0');">base_node</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class graph_parser.node_parse_info.base_node.BaseNode=graph_parser.node_parse_info.base_node.BaseNode-class.html"><a title="graph_parser.node_parse_info.base_node.BaseNode" class="py-name" href="#" onclick="return doclink('link-1', 'BaseNode', 'link-1');">BaseNode</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="Sobel3x3"></a><div id="Sobel3x3-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="Sobel3x3-toggle" onclick="return toggle('Sobel3x3');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="graph_parser.node_parse_info.sobel3x3.Sobel3x3-class.html">Sobel3x3</a><tt class="py-op">(</tt><tt class="py-base-class">BaseNode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Sobel3x3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Sobel3x3-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-docstring">"""Class for parsing node with the given class name."""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="Sobel3x3.__init__"></a><div id="Sobel3x3.__init__-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="Sobel3x3.__init__-toggle" onclick="return toggle('Sobel3x3.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.node_parse_info.sobel3x3.Sobel3x3-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Sobel3x3.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Sobel3x3.__init__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-docstring">"""Initialization of Class object"""</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt id="link-2" class="py-name"><a title="graph_parser.node_parse_info.base_node.BaseNode" class="py-name" href="#" onclick="return doclink('link-2', 'BaseNode', 'link-1');">BaseNode</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method graph_parser.graphml_parser.function_nodes.FunctionNodes.__init__()=graph_parser.graphml_parser.function_nodes.FunctionNodes-class.html#__init__,Method graph_parser.graphml_parser.function_nodes.IndexLists.__init__()=graph_parser.graphml_parser.function_nodes.IndexLists-class.html#__init__,Method graph_parser.graphml_parser.function_nodes.NodeInfo.__init__()=graph_parser.graphml_parser.function_nodes.NodeInfo-class.html#__init__,Method graph_parser.graphml_parser.graphml_parser.GraphParser.__init__()=graph_parser.graphml_parser.graphml_parser.GraphParser-class.html#__init__,Method graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker.__init__()=graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker-class.html#__init__,Method graph_parser.graphml_parser.image_nodes.ImageAttributes.__init__()=graph_parser.graphml_parser.image_nodes.ImageAttributes-class.html#__init__,Method graph_parser.graphml_parser.image_nodes.ImageNodes.__init__()=graph_parser.graphml_parser.image_nodes.ImageNodes-class.html#__init__,Method graph_parser.graphml_parser.userdata.Userdata.__init__()=graph_parser.graphml_parser.userdata.Userdata-class.html#__init__,Method graph_parser.node_parse_info.abs_diff.AbsDiff.__init__()=graph_parser.node_parse_info.abs_diff.AbsDiff-class.html#__init__,Method graph_parser.node_parse_info.add.Add.__init__()=graph_parser.node_parse_info.add.Add-class.html#__init__,Method graph_parser.node_parse_info.and_node.And.__init__()=graph_parser.node_parse_info.and_node.And-class.html#__init__,Method graph_parser.node_parse_info.base_node.BaseNode.__init__()=graph_parser.node_parse_info.base_node.BaseNode-class.html#__init__,Method graph_parser.node_parse_info.convert_depth.ConvertDepth.__init__()=graph_parser.node_parse_info.convert_depth.ConvertDepth-class.html#__init__,Method graph_parser.node_parse_info.dilate2x2.Dilate2x2.__init__()=graph_parser.node_parse_info.dilate2x2.Dilate2x2-class.html#__init__,Method graph_parser.node_parse_info.dilate3x3.Dilate3x3.__init__()=graph_parser.node_parse_info.dilate3x3.Dilate3x3-class.html#__init__,Method graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.__init__()=graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest-class.html#__init__,Method graph_parser.node_parse_info.erode2x2.Erode2x2.__init__()=graph_parser.node_parse_info.erode2x2.Erode2x2-class.html#__init__,Method graph_parser.node_parse_info.erode3x3.Erode3x3.__init__()=graph_parser.node_parse_info.erode3x3.Erode3x3-class.html#__init__,Method graph_parser.node_parse_info.function_node_library.Library.__init__()=graph_parser.node_parse_info.function_node_library.Library-class.html#__init__,Method graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.__init__()=graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian-class.html#__init__,Method graph_parser.node_parse_info.magnitude.Magnitude.__init__()=graph_parser.node_parse_info.magnitude.Magnitude-class.html#__init__,Method graph_parser.node_parse_info.multiply.Multiply.__init__()=graph_parser.node_parse_info.multiply.Multiply-class.html#__init__,Method graph_parser.node_parse_info.or_node.Or.__init__()=graph_parser.node_parse_info.or_node.Or-class.html#__init__,Method graph_parser.node_parse_info.scale_image.ScaleImage.__init__()=graph_parser.node_parse_info.scale_image.ScaleImage-class.html#__init__,Method graph_parser.node_parse_info.sobel3x3.Sobel3x3.__init__()=graph_parser.node_parse_info.sobel3x3.Sobel3x3-class.html#__init__,Method graph_parser.node_parse_info.subtract.Subtract.__init__()=graph_parser.node_parse_info.subtract.Subtract-class.html#__init__,Method graph_parser.node_parse_info.table_lookup.TableLookup.__init__()=graph_parser.node_parse_info.table_lookup.TableLookup-class.html#__init__,Method graph_parser.node_parse_info.threshold.Threshold.__init__()=graph_parser.node_parse_info.threshold.Threshold-class.html#__init__,Method graph_parser.node_parse_info.warp_affine.WarpAffine.__init__()=graph_parser.node_parse_info.warp_affine.WarpAffine-class.html#__init__"><a title="graph_parser.graphml_parser.function_nodes.FunctionNodes.__init__
+graph_parser.graphml_parser.function_nodes.IndexLists.__init__
+graph_parser.graphml_parser.function_nodes.NodeInfo.__init__
+graph_parser.graphml_parser.graphml_parser.GraphParser.__init__
+graph_parser.graphml_parser.image_format_checker.ImageNodeFormatChecker.__init__
+graph_parser.graphml_parser.image_nodes.ImageAttributes.__init__
+graph_parser.graphml_parser.image_nodes.ImageNodes.__init__
+graph_parser.graphml_parser.userdata.Userdata.__init__
+graph_parser.node_parse_info.abs_diff.AbsDiff.__init__
+graph_parser.node_parse_info.add.Add.__init__
+graph_parser.node_parse_info.and_node.And.__init__
+graph_parser.node_parse_info.base_node.BaseNode.__init__
+graph_parser.node_parse_info.convert_depth.ConvertDepth.__init__
+graph_parser.node_parse_info.dilate2x2.Dilate2x2.__init__
+graph_parser.node_parse_info.dilate3x3.Dilate3x3.__init__
+graph_parser.node_parse_info.dubbel_io_test.DubbelIoTest.__init__
+graph_parser.node_parse_info.erode2x2.Erode2x2.__init__
+graph_parser.node_parse_info.erode3x3.Erode3x3.__init__
+graph_parser.node_parse_info.function_node_library.Library.__init__
+graph_parser.node_parse_info.half_scale_gaussian.HalfScaleGaussian.__init__
+graph_parser.node_parse_info.magnitude.Magnitude.__init__
+graph_parser.node_parse_info.multiply.Multiply.__init__
+graph_parser.node_parse_info.or_node.Or.__init__
+graph_parser.node_parse_info.scale_image.ScaleImage.__init__
+graph_parser.node_parse_info.sobel3x3.Sobel3x3.__init__
+graph_parser.node_parse_info.subtract.Subtract.__init__
+graph_parser.node_parse_info.table_lookup.TableLookup.__init__
+graph_parser.node_parse_info.threshold.Threshold.__init__
+graph_parser.node_parse_info.warp_affine.WarpAffine.__init__" class="py-name" href="#" onclick="return doclink('link-3', '__init__', 'link-3');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="Sobel3x3.parse"></a><div id="Sobel3x3.parse-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="Sobel3x3.parse-toggle" onclick="return toggle('Sobel3x3.parse');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="graph_parser.node_parse_info.sobel3x3.Sobel3x3-class.html#parse">parse</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">graphparser</tt><tt class="py-op">,</tt> <tt class="py-param">current_node</tt><tt class="py-op">,</tt> <tt class="py-param">assignment_string</tt><tt class="py-op">,</tt> <tt class="py-param">dry_run</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Sobel3x3.parse-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Sobel3x3.parse-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-docstring">"""Parsing of xml and C code for creation of the function node."""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.reset_parameters()=graph_parser.node_parse_info.base_node.BaseNode-class.html#reset_parameters"><a title="graph_parser.node_parse_info.base_node.BaseNode.reset_parameters" class="py-name" href="#" onclick="return doclink('link-4', 'reset_parameters', 'link-4');">reset_parameters</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">,</tt> <tt class="py-name">dry_run</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">parsed_string</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-comment">#===============</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-comment"># ERROR CHECKING</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-comment">#===============</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.require_nbr_input_edges()=graph_parser.node_parse_info.base_node.BaseNode-class.html#require_nbr_input_edges"><a title="graph_parser.node_parse_info.base_node.BaseNode.require_nbr_input_edges" class="py-name" href="#" onclick="return doclink('link-5', 'require_nbr_input_edges', 'link-5');">require_nbr_input_edges</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.require_nbr_output_edges()=graph_parser.node_parse_info.base_node.BaseNode-class.html#require_nbr_output_edges"><a title="graph_parser.node_parse_info.base_node.BaseNode.require_nbr_output_edges" class="py-name" href="#" onclick="return doclink('link-6', 'require_nbr_output_edges', 'link-6');">require_nbr_output_edges</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.require_2_output_edges_labeled()=graph_parser.node_parse_info.base_node.BaseNode-class.html#require_2_output_edges_labeled"><a title="graph_parser.node_parse_info.base_node.BaseNode.require_2_output_edges_labeled" class="py-name" href="#" onclick="return doclink('link-7', 'require_2_output_edges_labeled', 'link-7');">require_2_output_edges_labeled</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-comment">#=================</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-comment"># PARSE PARAMETERS</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-comment">#=================</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">node_has_errors</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">"    "</tt> <tt class="py-op">+</tt> <tt class="py-name">assignment_string</tt> <tt class="py-op">+</tt> <tt class="py-string">"vxSobel3x3Node(graph_skeleton"</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.parse_input_parameters()=graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_input_parameters"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_input_parameters" class="py-name" href="#" onclick="return doclink('link-8', 'parse_input_parameters', 'link-8');">parse_input_parameters</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.parse_output_parameters()=graph_parser.node_parse_info.base_node.BaseNode-class.html#parse_output_parameters"><a title="graph_parser.node_parse_info.base_node.BaseNode.parse_output_parameters" class="py-name" href="#" onclick="return doclink('link-9', 'parse_output_parameters', 'link-9');">parse_output_parameters</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-string">");\n"</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-name">parsed_string</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method graph_parser.node_parse_info.base_node.BaseNode.append_to_io_arrays()=graph_parser.node_parse_info.base_node.BaseNode-class.html#append_to_io_arrays"><a title="graph_parser.node_parse_info.base_node.BaseNode.append_to_io_arrays" class="py-name" href="#" onclick="return doclink('link-10', 'append_to_io_arrays', 'link-10');">append_to_io_arrays</a></tt><tt class="py-op">(</tt><tt class="py-name">graphparser</tt><tt class="py-op">,</tt> <tt class="py-name">current_node</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">parsed_string</tt> </tt>
+</div></div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="graph_parser-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1
+    on Fri May 10 09:14:19 2019
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
