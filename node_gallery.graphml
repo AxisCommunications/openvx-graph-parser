@@ -175,8 +175,9 @@ image<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:Mode
     <node id="n13">
       <data key="d5" xml:space="preserve"><![CDATA[[vx_threshold_type_e VX_THRESHOLD_TYPE_BINARY]
 [vx_type_e VX_TYPE_UINT8]
-[vx_size vx_int32]
-[vx_int32 opts->ref_thresh]
+[vx_size vx_uint8]
+[vx_uint8 128]
+[vx_pixel_value_t 128]
 [vx_threshold_attribute_e VX_THRESHOLD_THRESHOLD_VALUE]
 ]]></data>
       <data key="d6">
