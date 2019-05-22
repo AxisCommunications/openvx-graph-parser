@@ -70,7 +70,7 @@ image<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:Mode
 [vx_df_image_e VX_DF_IMAGE_S16]
 [width ref_width]
 [height ref_height]
-[uniform_value 256]]]></data>
+[uniform_value 100]]]></data>
       <data key="d6">
         <y:GenericNode configuration="com.yworks.flowchart.process">
           <y:Geometry height="40.0" width="60.0" x="663.0902356858155" y="1210.3178647186946"/>
