@@ -193,7 +193,7 @@ def main():
         graphparser.validation_output_graph.writexml(validation_file)
         validation_file.close()
         if graphparser.verbose:
-            print "Created verification graph: " + validation_file
+            print "Created verification graph: " + graph_filename_validation
 
 if __name__ == "__main__":
     main()
