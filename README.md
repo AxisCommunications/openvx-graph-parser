@@ -1,3 +1,7 @@
+END-OF-LIFE NOTICE
+==================
+Axis Communications is no longer maintaining this project.
+
 # openvx-graph-parser
 Tools for OpenVX C code generation from graphical calculation graph definitions.
 Includes a Python based parser which takes graphs defined in graphml format and generates valid OpenVX C code.
